@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth, AuthProvider } from './contexts/AuthContext';
+import { useAuth, AuthProvider } from './AuthContext';
 import AppLayout from './components/AppLayout';
 import { Button } from './components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card';
