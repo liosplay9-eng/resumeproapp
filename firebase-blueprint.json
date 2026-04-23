@@ -1,0 +1,91 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user account information and subscription status.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "isPro": { "type": "boolean" },
+        "subscriptionType": { "type": "string", "enum": ["free", "monthly", "yearly"] },
+        "resumesCount": { "type": "integer" },
+        "streakCount": { "type": "integer" },
+        "lastActiveDate": { "type": "string", "format": "date-time" },
+        "referralCode": { "type": "string" },
+        "referredBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "email"]
+    },
+    "Resume": {
+      "title": "Resume",
+      "description": "User created resume data.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "personalInfo": { "type": "object" },
+        "education": { "type": "array" },
+        "experience": { "type": "array" },
+        "skills": { "type": "array" },
+        "projects": { "type": "array" },
+        "languages": { "type": "array" },
+        "templateId": { "type": "string" },
+        "isAtsFriendly": { "type": "boolean" },
+        "atsScore": { "type": "integer" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title"]
+    },
+    "CoverLetter": {
+      "title": "Cover Letter",
+      "description": "AI generated cover letter.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "jobDescription": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Payment": {
+      "title": "Payment Transaction",
+      "description": "History of user payments via Razorpay.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "razorpayOrderId": { "type": "string" },
+        "razorpayPaymentId": { "type": "string" },
+        "amount": { "type": "number" },
+        "currency": { "type": "string" },
+        "plan": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Individual user document."
+    },
+    "/resumes/{resumeId}": {
+      "schema": "Resume",
+      "description": "Collection of resumes owned by users."
+    },
+    "/coverLetters/{letterId}": {
+      "schema": "CoverLetter",
+      "description": "Collection of cover letters."
+    },
+    "/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Payment records for auditing and pro status."
+    }
+  }
+}
